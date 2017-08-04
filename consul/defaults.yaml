@@ -12,8 +12,7 @@ consul:
     enable_debug: True
     log_level: info
     encrypt: "ssdfdsaaffssdf"
-    retry-join-ec2-tag-key: 'Consul'
-    retry-join-ec2-tag-value: 'Enabled'
+    retry-join: 'provider=aws tag_key=Consul tag_value=Enabled'
     retry_interval: 30s
     datacenter: "main"
   register: []
