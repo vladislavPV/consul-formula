@@ -4,10 +4,11 @@ Wants=network.target
 After=network.target
 
 [Service]
+PermissionsStartOnly=true
 Environment="GOMAXPROCS=2" "PATH=/usr/local/bin:/usr/bin:/bin"
 
-ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)"
-ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)"
+ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PRIVATE_IP=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)"
+ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)"
 
 ExecStart=/usr/local/bin/consul agent \
 		-config-dir=/etc/consul.d \
