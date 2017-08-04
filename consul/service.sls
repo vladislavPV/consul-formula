@@ -13,6 +13,7 @@ consul-init-file:
     {%- else %}
     - source: salt://{{ slspath }}/files/consul.sysvinit
     - name: /etc/init.d/consul
+    - template: jinja
     - mode: 0755
     {%- endif %}
 
