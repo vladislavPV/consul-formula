@@ -11,8 +11,8 @@ consul:
     ui: true
     enable_debug: True
     log_level: info
-    encrypt: "ssdfdsaaffssdf"
-    retry-join: 'provider=aws tag_key=Consul tag_value=Enabled'
+    encrypt: "Hj4+LWeot6YQ63hAGJaMng=="
+    retry_join: ["provider=aws tag_key=Consul tag_value=Enabled"]
     retry_interval: 30s
     datacenter: "main"
   register: []
