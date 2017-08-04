@@ -1,5 +1,5 @@
 consul:
-  version: 0.8.5
+  version: 0.9.0
   download_host: releases.hashicorp.com
 
   service: True
@@ -12,8 +12,6 @@ consul:
     enable_debug: True
     log_level: info
     encrypt: "ssdfdsaaffssdf"
-    retry-join-ec2-tag-key: 'Consul'
-    retry-join-ec2-tag-value: 'Enabled'
     retry_interval: 30s
     datacenter: "main"
   register: []
