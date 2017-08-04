@@ -11,8 +11,8 @@ ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PUBLIC_IP=$(cu
 
 ExecStart=/usr/local/bin/consul agent \
 		-config-dir=/etc/consul.d \
-		-advertise_addr=${PRIVATE_IP} \
-		-advertise_addr_wan=${PUBLIC_IP} \
+		-advertise=${PRIVATE_IP} \
+		-advertise-wan=${PUBLIC_IP} \
 		-retry-join-ec2-tag-key=Consul \
 		-retry-join-ec2-tag-value=Enabled
 
