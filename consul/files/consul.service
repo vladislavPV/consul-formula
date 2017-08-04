@@ -5,7 +5,17 @@ After=network.target
 
 [Service]
 Environment="GOMAXPROCS=2" "PATH=/usr/local/bin:/usr/bin:/bin"
-ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d -retry-join-ec2-tag-key=Consul -retry-join-ec2-tag-value=Enabled
+
+ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)"
+ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)"
+
+ExecStart=/usr/local/bin/consul agent \
+		-config-dir=/etc/consul.d \
+		-advertise_addr=${PRIVATE_IP} \
+		-advertise_addr_wan=${PUBLIC_IP} \
+		-retry-join-ec2-tag-key=Consul \
+		-retry-join-ec2-tag-value=Enabled
+
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=TERM
 User=consul
