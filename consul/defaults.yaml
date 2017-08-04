@@ -2,17 +2,20 @@ consul:
   version: 0.9.0
   download_host: releases.hashicorp.com
 
-  service: True
+  service: true
   config:
     server: true
     bind_addr: 0.0.0.0
     bootstrap_expect: 3
     data_dir: /var/consul
     ui: true
-    enable_debug: True
+    enable_debug: true
     log_level: info
     encrypt: "ssdfdsaaffssdf"
     retry_interval: 30s
     datacenter: "main"
+    disable_remote_exec: true
+    disable_update_check: true
+    leave_on_terminate: true
   register: []
   scripts: []
