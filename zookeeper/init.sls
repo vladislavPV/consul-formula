@@ -47,5 +47,5 @@ consul-template:
   service.running:
     - restart: true
     - onchanges:
-      - file: {{ zk_home }}/zookeeper-{{ version }}/conf/zoo.cfg
+      - file: /etc/consul-template/tmpl-source/zoo.cfg
       - file: /etc/consul-template.d/zk.json
