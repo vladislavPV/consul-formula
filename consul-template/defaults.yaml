@@ -1,6 +1,6 @@
 consul_template:
   version: 0.19.0
-  hash: 7c70ea5f230a70c809333e75fdcff2f6f1e838f29cfb872e1420a63cdf7f3a78
+  hash: 31dda6ebc7bd7712598c6ac0337ce8fd8c533229887bd58e825757af879c5f9f
 
   service: false
   config:
