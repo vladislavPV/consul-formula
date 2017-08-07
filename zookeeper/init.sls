@@ -17,7 +17,7 @@ install-zookeeper:
     - source: http://mirror.csclub.uwaterloo.ca/apache/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
     - skip_verify: True
     - archive_format: tar
-    #- if_missing: {{ zk.real_home }}/lib
+    #- if_missing: /lib
     - user: root
     - group: root
 
