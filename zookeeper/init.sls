@@ -8,7 +8,7 @@ register:
     consul.agent_service_register:
       - name: zookeeper
       - id: {{ service_id }}
-      - tags: '["{{ myid }}"]'
+      - tags: "{{ myid }}"
 
 java-1.8.0-openjdk:
   pkg.installed
