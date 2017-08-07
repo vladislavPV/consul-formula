@@ -1,4 +1,3 @@
-{%- from 'zookeeper/settings.sls' import zk with context -%}
 
 java:
   pkg.installed
