@@ -5,11 +5,14 @@
 
 register:
   module.run:
-    - func: consul.agent_service_register
+    - name: consul.agent_service_register
     - consul_url: http:localhost:8500
-    - m_name: zookeeper
-    - id: {{ service_id }}
-    # - tags: {{ myid }}
+    - kwargs: {
+        name: 'zookeeper',
+        id: {{ service_id }},
+        tags: {{ myid }}
+    }
+
 
 java-1.8.0-openjdk:
   pkg.installed
