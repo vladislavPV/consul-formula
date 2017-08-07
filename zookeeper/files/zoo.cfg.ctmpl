@@ -27,13 +27,13 @@ autopurge.snapRetainCount=3
 # Set to "0" to disable auto purge feature
 autopurge.purgeInterval=4
 
-{{ $myid_counter := key "zk/zkcounter" | parseInt }}
-{{ range $i,  $services := service "zookeeper" }}
-{{ with node }}
-{{- if eq $services.Node .Node.Node -}}
-server.{{ $myid_counter | add $i }}=0.0.0.0:2888:3888
-{{- else -}}
-server.{{ $myid_counter | add $i }}={{$services.Address}}:2888:3888
-{{- end -}}
-{{- end -}}
-{{ end }}
+{{{ $myid_counter := key "zk/zkcounter" | parseInt }}}
+{{{ range $i,  $services := service "zookeeper" }}}
+{{{ with node }}}
+{{{- if eq $services.Node .Node.Node -}}}
+server.{{{ $myid_counter | add $i }}}=0.0.0.0:2888:3888
+{{{- else -}}}
+server.{{{ $myid_counter | add $i }}}={{{$services.Address}}}:2888:3888
+{{{- end -}}}
+{{{- end -}}}
+{{{ end }}}
