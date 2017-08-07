@@ -9,7 +9,7 @@ syncLimit=5
 # the directory where the snapshot is stored.
 # do not use /tmp for storage, /tmp here is just
 # example sakes.
-dataDir=/data
+dataDir=/var/zookeeper_data
 # the port at which the clients will connect
 clientPort=2181
 # the maximum number of client connections.
@@ -25,8 +25,7 @@ clientPort=2181
 autopurge.snapRetainCount=3
 # Purge task interval in hours
 # Set to "0" to disable auto purge feature
-autopurge.purgeInterval=4
-
+autopurge.purgeInterval=1
 [[[ range $i,  $services := service "zookeeper" ]]]
 [[[ with node ]]]
 [[[- if eq $services.Node .Node.Node -]]]
