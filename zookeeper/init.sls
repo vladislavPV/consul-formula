@@ -23,7 +23,7 @@ install-zookeeper:
     - source: http://mirror.csclub.uwaterloo.ca/apache/zookeeper/zookeeper-{{ version }}/zookeeper-{{ version }}.tar.gz
     - skip_verify: True
     - archive_format: tar
-    - if_missing: {{ zk_home }}/zookeeper-{{ version }}
+    - unless: test -d {{ zk_home }}/zookeeper-{{ version }}
     - user: root
     - group: root
     - trim_output: 5
