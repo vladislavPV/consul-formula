@@ -1,5 +1,9 @@
 {% set version = '3.4.8' %}
 {% set zk_home = '/var/zookeeper' %}
+{% set myid = pillar.get('myid') %}
+{% set srv_id = pillar.get('srv_id') %}
+
+{% salt['agent_service_register']('name=zookeeper, id='+srv_id+',tags='+myid) %}
 
 java-1.8.0-openjdk:
   pkg.installed
@@ -31,7 +35,7 @@ install-zookeeper:
 /var/zookeeper_data/myid:
   file.managed:
     - contents:
-      - {{ grains['id'] }}
+      - {{ myid }}
 
 /etc/consul-template/tmpl-source/zoo.cfg:
   file.managed:
