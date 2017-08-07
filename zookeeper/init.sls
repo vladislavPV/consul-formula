@@ -3,7 +3,7 @@
 {% set myid = pillar.get('myid') %}
 {% set srv_id = pillar.get('srv_id') %}
 
-{% salt['agent_service_register']('name=zookeeper, id='+srv_id+',tags='+myid) %}
+{% salt['consul.agent_service_register']('name=zookeeper, id='+srv_id+',tags='+myid) %}
 
 java-1.8.0-openjdk:
   pkg.installed
