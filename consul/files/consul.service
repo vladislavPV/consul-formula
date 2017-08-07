@@ -10,13 +10,8 @@ ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=TERM
 User=consul
 
-{%- if 'amazon' in grains['biosversion'] -%}
 ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PRIVATE_IP=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)"
 ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)"
-{% else %}
-ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PRIVATE_IP={{ salt[network.ip_addrs](type=private)[0] }}"
-ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment PUBLIC_IP={{ salt[network.ip_addrs](type=public)[0] }}"
-{%- endif -%}
 
 ExecStart=/usr/local/bin/consul agent \
 		-advertise=${PRIVATE_IP} \
