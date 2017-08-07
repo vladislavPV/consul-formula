@@ -1,7 +1,7 @@
 {% set version = '3.4.8' %}
 {% set zk_home = '/var/zookeeper' %}
 
-openjdk-8-jre-headless:
+java-1.8.0-openjdk:
   pkg.installed
 
 /etc/systemd/system/zookeeper.service:
