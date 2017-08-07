@@ -1,3 +1,5 @@
+{% set version = '3.4.8' %}
+{% set zk_home = '/var/zookeeper' %}
 
 java:
   pkg.installed
@@ -7,7 +9,7 @@ java:
     - template: jinja
     - source: salt://zookeeper/files/zookeeper.service
     - content:
-      version: 3.4.8
+      version: {{ version }}
 
 /var/zookeeper:
   file.directory
@@ -15,11 +17,12 @@ java:
 
 install-zookeeper:
   archive.extracted:
-    - name: /var/zookeeper
-    - source: http://mirror.csclub.uwaterloo.ca/apache/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+    - name: {{ zk_home }}
+    - source: http://mirror.csclub.uwaterloo.ca/apache/zookeeper/zookeeper-{{ version }}/zookeeper-{{ version }}.tar.gz
     - skip_verify: True
     - archive_format: tar
-    #- if_missing: /lib
+    - if_missing: {{ zk_home }}/zookeeper-{{ version }}
     - user: root
     - group: root
+    - trim_output: 5
 
