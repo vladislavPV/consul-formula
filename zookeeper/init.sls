@@ -5,7 +5,7 @@
 
 register:
   module.run:
-    - name: consul.agent_service_register:
+    - name: consul.agent_service_register
     - m_name: zookeeper
     - id: {{ service_id }}
     # - tags: {{ myid }}
