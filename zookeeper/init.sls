@@ -11,9 +11,11 @@ java-1.8.0-openjdk:
     - content:
       version: {{ version }}
 
-/var/zookeeper:
-  file.directory
-
+zookeeper-dirs:
+  file.directory:
+    - names:
+      - /var/zookeeper
+      - /var/zookeeper_data
 
 install-zookeeper:
   archive.extracted:
@@ -26,3 +28,24 @@ install-zookeeper:
     - group: root
     - trim_output: 5
 
+/var/zookeeper_data/myid:
+  file.managed:
+    - contents:
+      - {{ grains['id'] }}
+
+/etc/consul-template/tmpl-source/zoo.cfg:
+  file.managed:
+    - template: jinja
+    - source: salt://zookeeper/files/zoo.cfg.ctmpl
+
+/etc/consul-template.d/zk.json:
+  file.managed:
+    - template: jinja
+    - source: salt://zookeeper/files/zookeeper.json
+
+consul-template:
+  service.running:
+    - restart: true
+    - onchanges:
+      - file: {{ zk_home }}/zookeeper-{{ version }}/conf/zoo.cfg
+      - file: /etc/consul-template.d/zk.json
