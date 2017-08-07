@@ -3,14 +3,14 @@ Description=Apache ZooKeeper
 Documentation=https://zookeeper.apache.org/doc/trunk/
 Requires=network.target remote-fs.target
 After=network.target remote-fs.target
-ConditionPathExists=/var/zookeeper/zookeeper-{{ zookeeper.version }}
+ConditionPathExists=/var/zookeeper/zookeeper-{{ version }}
 
 [Service]
 Type=simple
 User=root
 Group=root
-ExecStart=/var/zookeeper/zookeeper-{{ zookeeper.version }}/bin/zkServer.sh start-foreground
-ExecStop=/var/zookeeper/zookeeper-{{ zookeeper.version }}/bin/zkServer.sh stop
+ExecStart=/var/zookeeper/zookeeper-{{ version }}/bin/zkServer.sh start-foreground
+ExecStop=/var/zookeeper/zookeeper-{{ version }}/bin/zkServer.sh stop
 SyslogIdentifier=zookeeper
 
 [Install]

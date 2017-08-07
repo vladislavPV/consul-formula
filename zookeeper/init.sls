@@ -6,6 +6,8 @@ java:
   file.managed:
     - template: jinja
     - source: salt://zookeeper/files/zookeeper.service
+    - content:
+      version: 3.4.8
 
 /var/zookeeper:
   file.directory
