@@ -44,6 +44,7 @@ install-zookeeper:
     - source: salt://zookeeper/files/zookeeper.json
     - content:
       zk_home: {{ zk_home }}
+      version: {{ version }}
 
 consul-template:
   service.running:
