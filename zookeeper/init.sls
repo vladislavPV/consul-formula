@@ -42,6 +42,8 @@ install-zookeeper:
   file.managed:
     - template: jinja
     - source: salt://zookeeper/files/zookeeper.json
+    - content:
+      zk_home: {{ zk_home }}
 
 consul-template:
   service.running:
