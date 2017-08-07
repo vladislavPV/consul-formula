@@ -7,7 +7,7 @@ register:
   module.run:
     - func: consul.agent_service_register
     - consul_url: http:localhost:8500
-    - name: zookeeper
+    - m_name: zookeeper
     - id: {{ service_id }}
     # - tags: {{ myid }}
 
