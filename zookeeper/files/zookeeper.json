@@ -2,7 +2,7 @@
   "template": {
     "destination": "{{ zk_home }}/zookeeper-{{ version }}/conf/zoo.cfg",
     "source": "/etc/consul-template/tmpl-source/zoo.cfg",
-    "command": "systemctl reload zookeeper",
+    "command": "systemctl stop zookeeper",
     "left_delimiter": "[[[",
     "right_delimiter":  "]]]"
   }
