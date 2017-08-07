@@ -3,7 +3,7 @@
     "destination": "{{ zk_home }}/zookeeper-{{ version }}/conf/zoo.cfg",
     "source": "/etc/consul-template/tmpl-source/zoo.cfg",
     "command": "systemctl reload zookeeper",
-    "left_delimiter": "{{{",
-    "right_delimiter":  "}}}"
+    "left_delimiter": "[[[",
+    "right_delimiter":  "]]]"
   }
 }
