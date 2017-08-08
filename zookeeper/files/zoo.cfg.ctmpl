@@ -28,11 +28,5 @@ autopurge.snapRetainCount=3
 autopurge.purgeInterval=1
 
 [[[ range $i,  $services := service "zookeeper" ]]]
-[[[ with node ]]]
-[[[- if eq $services.Node .Node.Node -]]]
-server.[[[ $services.Tags | join "" ]]]=0.0.0.0:2888:3888
-[[[- else -]]]
 server.[[[ $services.Tags | join "" ]]]=[[[ $services.Address ]]]:2888:3888
-[[[- end -]]]
-[[[- end -]]]
 [[[ end ]]]
