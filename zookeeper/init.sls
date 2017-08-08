@@ -1,7 +1,8 @@
 {% set version = '3.4.8' %}
 {% set zk_home = '/var/zookeeper' %}
+{% set service_name = 'zookeeper' %}
 {% set myid = pillar.get('myid') %}
-{% set service_id = pillar.get('service_id') %}
+{% set service_id = pillar.get('service_id', service_name) %}
 
 deregister:
   module.run:
@@ -14,30 +15,10 @@ register:
     - name: consul.agent_service_register
     - consul_url: 'http://localhost:8500'
     - kwargs: {
-          name: 'zookeeper',
+          name: {{ service_name }},
           id: {{ service_id }},
           tags: ["{{ myid }}"]
       }
-
-# /etc/consul.d/zookeeper_{{ service_id }}:
-#   file.managed:
-#     - contents:
-#       - '{'
-#       - '  "services": ['
-#       - '    {'
-#       - '        "ServiceID": "zookeeper",'
-#       - '        "ServiceName": "zookeeper",'
-#       - '        "ServiceTags": ['
-#       - '            "0"'
-#       - '        ]'
-#       - '    }'
-#       - '  ]'
-#       - '}'
-
-# 'systemctl restart consul':
-#   cmd.run:
-#     - onchanges:
-#       - file: /etc/consul.d/zookeeper_{{ service_id }}
 
 java-1.8.0-openjdk:
   pkg.installed
