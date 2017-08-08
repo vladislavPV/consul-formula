@@ -27,6 +27,6 @@ autopurge.snapRetainCount=3
 # Set to "0" to disable auto purge feature
 autopurge.purgeInterval=1
 
-[[[ range $i,  $services := service "zookeeper" -]]]
+[[[ range $i,  $services := service "zookeeper" ]]]
 server.[[[ $services.Tags | join "" ]]]=[[[ $services.Address ]]]:2888:3888
-[[[- end ]]]
+[[[ end ]]]
