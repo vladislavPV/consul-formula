@@ -3,30 +3,36 @@
 {% set myid = pillar.get('myid') %}
 {% set service_id = pillar.get('service_id') %}
 
-# register:
-#   module.run:
-#     - name: consul.agent_service_register
-#     - consul_url: 'http://localhost:8500'
-#     - kwargs: {
-#           name: 'zookeeper',
-#           id: {{ service_id }},
-#           tags: ["{{ myid }}"]
-#       }
+deregister:
+  module.run:
+    - name: consul.agent_service_deregister
+    - consul_url: 'http://localhost:8500'
+    - serviceid: {{ service_id }}
 
-/etc/consul.d/zookeeper_{{ service_id }}:
-  file.managed:
-    - contents:
-      - '{'
-      - '  "services": ['
-      - '    {'
-      - '        "ServiceID": "zookeeper",'
-      - '        "ServiceName": "zookeeper",'
-      - '        "ServiceTags": ['
-      - '            "0"'
-      - '        ]'
-      - '    }'
-      - '  ]'
-      - '}'
+register:
+  module.run:
+    - name: consul.agent_service_register
+    - consul_url: 'http://localhost:8500'
+    - kwargs: {
+          name: 'zookeeper',
+          id: {{ service_id }},
+          tags: ["{{ myid }}"]
+      }
+
+# /etc/consul.d/zookeeper_{{ service_id }}:
+#   file.managed:
+#     - contents:
+#       - '{'
+#       - '  "services": ['
+#       - '    {'
+#       - '        "ServiceID": "zookeeper",'
+#       - '        "ServiceName": "zookeeper",'
+#       - '        "ServiceTags": ['
+#       - '            "0"'
+#       - '        ]'
+#       - '    }'
+#       - '  ]'
+#       - '}'
 
 'systemctl restart consul':
   cmd.run:
