@@ -21,6 +21,7 @@ nginx:
 
 consul_nginx_config:
   file.managed:
+    - name: /etc/nginx/nginx.conf
     - source: salt://consul/files/nginx.conf
 
 systemctl restart nginx:
