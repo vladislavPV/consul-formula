@@ -34,10 +34,10 @@ register:
 #       - '  ]'
 #       - '}'
 
-'systemctl restart consul':
-  cmd.run:
-    - onchanges:
-      - file: /etc/consul.d/zookeeper_{{ service_id }}
+# 'systemctl restart consul':
+#   cmd.run:
+#     - onchanges:
+#       - file: /etc/consul.d/zookeeper_{{ service_id }}
 
 java-1.8.0-openjdk:
   pkg.installed
