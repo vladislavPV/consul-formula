@@ -14,6 +14,23 @@ consul-config:
     - contents: |
         {{ consul.config | json }}
 
+{% if consul.config.ui != False %}
+
+nginx:
+  pkg.installed
+
+consul_nginx_config:
+  file.managed:
+    - source: salt://consul/files/nginx.conf
+
+systemctl restart nginx:
+  cmd.run:
+    - onchanges:
+      - file: consul_nginx_config
+      - pkg: nginx
+
+{% endif %}
+
 {% for script in consul.scripts %}
 consul-script-install-{{ loop.index }}:
   file.managed:
