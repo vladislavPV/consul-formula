@@ -13,6 +13,7 @@ append_resolvers:
     - text:
       - '{{ search }}'
       - 'nameserver 127.0.0.1'
+    - unless: test -f /etc/dnsmasq.d/99-default
 
 /etc/dnsmasq.d/99-default:
   file.managed:
@@ -26,7 +27,6 @@ append_resolvers:
   file.managed:
     - contents:
       - 'server=/consul./127.0.0.1#8600'
-    - unless: test -f /etc/dnsmasq.d/99-default
 
 systemctl restart dnsmasq:
   cmd.run:
