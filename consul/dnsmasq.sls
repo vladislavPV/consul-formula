@@ -17,8 +17,7 @@
 comment_resolvers:
   file.comment:
     - name: /etc/resolv.conf
-    - regex: ^.*$
-    - char: ';'
+    - regex: '^\w*$'
     - onlyif: test -f /etc/dnsmasq.d/99-default
 
 append_resolvers:
