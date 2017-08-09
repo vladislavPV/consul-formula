@@ -6,6 +6,7 @@
       {% for server in dns_servers %}
       - 'server={{ server }}'
       {% endfor %}
+    - unless: test -f /etc/dnsmasq.d/99-default
 
 /etc/dnsmasq.d/10-consul:
   file.managed:
@@ -18,7 +19,8 @@
     - pattern: 'nameserver.*$'
     - repl: 'nameserver 127.0.0.1'
     - append_if_not_found: true
-    - count: 3
+
+
 systemctl restart dnsmasq:
   cmd.run:
     - onchanges:
