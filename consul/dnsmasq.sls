@@ -14,7 +14,7 @@
 
 
 /etc/resolv.conf:
-  file.managed:
+  file.replace:
     - pattern: 'nameserver.*$'
     - replace: 'nameserver 127.0.0.1'
     - append_if_not_found: true
