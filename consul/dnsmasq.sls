@@ -15,7 +15,7 @@
 
 /etc/resolv.conf:
   file.managed:
-    - pattern: 'nameserver *$'
+    - pattern: 'nameserver \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
     - replace: 'nameserver 127.0.0.1'
     - append_if_not_found: true
 
