@@ -14,8 +14,16 @@
     - contents:
       - 'server=/consul./127.0.0.1#8600'
 
-/etc/resolv.conf:
-  file.managed:
+comment_resolvers:
+  file.comment:
+    - name: /etc/resolv.conf
+    - regex: ^.*$
+    - char: ';'
+    - onlyif: test -f /etc/dnsmasq.d/99-default
+
+append_resolvers:
+  file.append:
+    - name: /etc/resolv.conf
     - contents:
       - '{{ search }}'
       - 'nameserver 127.0.0.1'
