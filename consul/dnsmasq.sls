@@ -1,4 +1,4 @@
-{% dns_servers = salt['cmd.shell']('cat /etc/resolv.conf |grep name|cut -d" " -f2|xargs').split(" ") %}
+{% set dns_servers = salt['cmd.shell']('cat /etc/resolv.conf |grep name|cut -d" " -f2|xargs').split(" ") %}
 
 /etc/dnsmasq.d/99-default:
   file.managed:
