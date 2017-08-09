@@ -17,8 +17,8 @@
 comment_resolvers:
   file.comment:
     - name: /etc/resolv.conf
-    - regex: '^\w*$'
-    - onlyif: test -f /etc/dnsmasq.d/99-default
+    - regex: '^.*$'
+    - unless: test -f /etc/dnsmasq.d/99-default
 
 append_resolvers:
   file.append:
@@ -26,7 +26,6 @@ append_resolvers:
     - text:
       - '{{ search }}'
       - 'nameserver 127.0.0.1'
-    - onlyif: test -f /etc/dnsmasq.d/99-default
 
 systemctl restart dnsmasq:
   cmd.run:
