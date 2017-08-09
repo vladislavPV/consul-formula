@@ -18,7 +18,7 @@
     - pattern: 'nameserver.*$'
     - repl: 'nameserver 127.0.0.1'
     - append_if_not_found: true
-
+    - count: 3
 systemctl restart dnsmasq:
   cmd.run:
     - onchanges:
