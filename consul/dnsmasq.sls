@@ -24,7 +24,7 @@ comment_resolvers:
 append_resolvers:
   file.append:
     - name: /etc/resolv.conf
-    - contents:
+    - text:
       - '{{ search }}'
       - 'nameserver 127.0.0.1'
     - onlyif: test -f /etc/dnsmasq.d/99-default
