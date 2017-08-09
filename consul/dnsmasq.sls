@@ -1,4 +1,5 @@
 {% set dns_servers = salt['cmd.shell']('cat /etc/resolv.conf |grep name|cut -d" " -f2|xargs').split(" ") %}
+{% set search = salt['cmd.shell']('cat /etc/resolv.conf |grep search') %}
 
 /etc/dnsmasq.d/99-default:
   file.managed:
@@ -13,13 +14,12 @@
     - contents:
       - 'server=/consul./127.0.0.1#8600'
 
-
 /etc/resolv.conf:
-  file.replace:
-    - pattern: 'nameserver.*$'
-    - repl: 'nameserver 127.0.0.1'
-    - append_if_not_found: true
-
+  file.managed:
+    - contents:
+      - '{{ search }}'
+      - 'nameserver 127.0.0.1'
+    - onlyif: test -f /etc/dnsmasq.d/99-default
 
 systemctl restart dnsmasq:
   cmd.run:
