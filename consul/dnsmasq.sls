@@ -16,7 +16,7 @@
 /etc/resolv.conf:
   file.replace:
     - pattern: 'nameserver.*$'
-    - replace: 'nameserver 127.0.0.1'
+    - repl: 'nameserver 127.0.0.1'
     - append_if_not_found: true
 
 systemctl restart dnsmasq:
